@@ -1,25 +1,21 @@
 import { Component } from '@angular/core';
-import { Usuario } from '../class/usuario';
-import { GestionUsuariosService } from '../../services/usuario.service';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; // Necesario para [(ngModel)]
 
 @Component({
   selector: 'app-crear-usuario',
+  standalone: true,
+  imports: [CommonModule, FormsModule], 
   templateUrl: './crear-usuario.component.html',
-  styleUrls: ['./crear-usuario.component.css'] // o .scss
+  styleUrls: ['./crear-usuario.component.css']
 })
 export class CrearUsuarioComponent {
-  usuario: Usuario = new Usuario();
+  // Estas variables enlazan con el HTML
+  nombre: string = '';
+  email: string = '';
 
-  constructor(private usuarioService: GestionUsuariosService) {}
-
-  guardar() {
-    this.usuarioService.crearUsuario(this.usuario).subscribe({
-      next: (res) => {
-        console.log('Guardado:', res);
-        alert('Usuario y datos de laboratorio guardados.');
-        this.usuario = new Usuario(); // Limpiar formulario
-      },
-      error: (err) => console.error(err)
-    });
+  guardarUsuario() {
+    console.log('Guardando usuario:', this.nombre, this.email);
+    alert('Usuario guardado (simulado): ' + this.nombre);
   }
 }

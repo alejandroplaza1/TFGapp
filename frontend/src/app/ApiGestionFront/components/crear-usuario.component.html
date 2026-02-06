@@ -1,18 +1,19 @@
-<div class="container">
-  <h3>Alta de Usuario</h3>
-  <form (ngSubmit)="guardar()">
+<div class="contenedor-principal">
+  <div class="tarjeta">
+    <h2>Crear Nuevo Usuario</h2>
+    
     <div>
-      <label>Nombre:</label>
-      <input type="text" [(ngModel)]="usuario.name" name="name" required>
+      <label>Nombre del Laboratorio</label>
+      <input type="text" [(ngModel)]="nombre" placeholder="Ej: Laboratorio Central">
     </div>
+
     <div>
-      <label>Email:</label>
-      <input type="email" [(ngModel)]="usuario.email" name="email" required>
+      <label>Correo Electrónico</label>
+      <input type="email" [(ngModel)]="email" placeholder="usuario@empresa.com">
     </div>
-    <div>
-      <label>Datos Lab:</label>
-      <textarea [(ngModel)]="usuario.labData" name="labData"></textarea>
-    </div>
-    <button type="submit">Guardar</button>
-  </form>
+
+    <button (click)="guardarUsuario()">
+      Guardar Usuario
+    </button>
+  </div>
 </div>
