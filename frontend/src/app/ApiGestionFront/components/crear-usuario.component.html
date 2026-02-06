@@ -1,0 +1,18 @@
+<div class="container">
+  <h3>Alta de Usuario</h3>
+  <form (ngSubmit)="guardar()">
+    <div>
+      <label>Nombre:</label>
+      <input type="text" [(ngModel)]="usuario.name" name="name" required>
+    </div>
+    <div>
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="usuario.email" name="email" required>
+    </div>
+    <div>
+      <label>Datos Lab:</label>
+      <textarea [(ngModel)]="usuario.labData" name="labData"></textarea>
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</div>
