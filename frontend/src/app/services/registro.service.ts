@@ -1,34 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class RegistroService {
-  // Ajusta esta URL según tu configuración de backend en Docker
-  private apiUrl = 'http://localhost:3000/api/registros'; 
+  private readonly baseUrl = 'https://tfgapp.onrender.com/api';
 
   constructor(private http: HttpClient) {}
 
-  /**
-   * Guarda un nuevo registro de muestra en la base de datos
-   */
+  /** Registros del usuario autenticado */
+  getMisRegistros(): Observable<any[]> {
+    return this.http
+      .get<{ message: string; data: any[] }>(`${this.baseUrl}/mis-registros`)
+      .pipe(map(r => r.data));
+  }
+
+  /** Crear un nuevo registro de muestra */
   crear(registro: any): Observable<any> {
-    return this.http.post(this.apiUrl, registro);
+    return this.http.post(`${this.baseUrl}/registros`, registro);
   }
 
-  /**
-   * Obtiene todos los registros (útil para la tabla de "Listar Muestras")
-   */
+  /** Todos los registros (admin) */
   listar(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
-
-  /**
-   * Actualiza un registro existente (ej: marcar como finalizado)
-   */
-  actualizar(id: string, datos: any): Observable<any> {
-    return this.http.put(`${this.apiUrl}/${id}`, datos);
+    return this.http
+      .get<{ message: string; data: any[] }>(`${this.baseUrl}/registros`)
+      .pipe(map(r => r.data));
   }
 }
